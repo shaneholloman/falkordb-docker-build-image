@@ -3,10 +3,17 @@ FROM redhat/ubi8 as builder
 # Install dependencies including gcc-toolset-14
 RUN yum update -y && \
     yum install -y wget autoconf automake python3.11 python3.11-pip \
-                   libtool git make openssl-devel libstdc++-static diffutils gcc-toolset-14 cmake && \
+                   libtool git make openssl3-devel libstdc++-static diffutils gcc-toolset-14 cmake && \
     alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
     alternatives --auto python3 && \
     yum clean all
+
+# Use OpenSSL 3 for builds
+ENV PKG_CONFIG_PATH="/usr/lib64/pkgconfig:${PKG_CONFIG_PATH}"
+ENV OPENSSL_ROOT_DIR="/usr"
+ENV OPENSSL_INCLUDE_DIR="/usr/include/openssl3"
+ENV OPENSSL_CRYPTO_LIBRARY="/usr/lib64/libcrypto.so.3"
+ENV OPENSSL_SSL_LIBRARY="/usr/lib64/libssl.so.3"
 
 # Enable gcc-toolset-14
 ENV PATH="/opt/rh/gcc-toolset-14/root/usr/bin:${PATH}"
