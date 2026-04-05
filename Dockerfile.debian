@@ -1,6 +1,12 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
-RUN apt-get update -y && apt-get install -y git wget build-essential lcov openssl libssl-dev python3 python3-venv rsync unzip curl m4 automake peg libtool autoconf python3-pip cmake
+RUN apt-get update -y && \
+    apt-get install -y git wget build-essential lcov openssl libssl-dev python3 python3-venv rsync unzip curl m4 automake peg libtool autoconf python3-pip cmake gcc-13 g++-13
+
+# Set gcc-13 and g++-13 as the default gcc/g++
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 130 \
+    --slave /usr/bin/g++ g++ /usr/bin/g++-13 \
+    --slave /usr/bin/gcov gcov /usr/bin/gcov-13
 
 # install rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
