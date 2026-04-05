@@ -1,6 +1,9 @@
 FROM debian:bookworm-slim
 
-RUN apt-get update -y && apt-get install -y git wget build-essential gcc-13 g++-13 lcov openssl libssl-dev python3 python3-venv rsync unzip curl m4 automake peg libtool autoconf python3-pip cmake
+RUN echo "deb http://deb.debian.org/debian bookworm-backports main" >> /etc/apt/sources.list && \
+    apt-get update -y && \
+    apt-get install -y git wget build-essential lcov openssl libssl-dev python3 python3-venv rsync unzip curl m4 automake peg libtool autoconf python3-pip cmake && \
+    apt-get install -y -t bookworm-backports gcc-13 g++-13
 
 # Set gcc-13 and g++-13 as the default gcc/g++
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 130 \
