@@ -13,6 +13,7 @@ RUN apk add --no-cache --no-scripts \
     wget \
     unzip \
     automake \
+    gperf \
     libtool \
     autoconf \
     openssl-dev \
