@@ -19,6 +19,7 @@ RUN apk add --no-cache --no-scripts \
     zlib-dev \
     zstd-dev \
     rust \
+    gperf \
     cargo \
     bsd-compat-headers \
     linux-headers \

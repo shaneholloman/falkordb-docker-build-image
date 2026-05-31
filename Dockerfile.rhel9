@@ -29,10 +29,16 @@ RUN set -eux; \
   cd ..; \
   rm -rf "peg-${PEG_VERSION}" peg.tar.gz
 
-# install redis
-# RUN wget https://download.redis.io/redis-stable.tar.gz && \
-#   tar -xzvf redis-stable.tar.gz && \
-#   cd redis-stable && \
-#   make && \
-#   make install && \
-#   cd ..
+# install gperf
+ARG GPERF_VERSION=3.1
+ARG GPERF_SHA256=588546b945bba4b70b6a3a616e80b4ab466e3f33024a352fc2198112cdbb3ae2
+RUN set -eux; \
+  wget -O gperf.tar.gz "https://ftp.gnu.org/gnu/gperf/gperf-${GPERF_VERSION}.tar.gz"; \
+  echo "${GPERF_SHA256}  gperf.tar.gz" | sha256sum -c -; \
+  tar -xzf gperf.tar.gz; \
+  cd "gperf-${GPERF_VERSION}"; \
+  ./configure; \
+  make; \
+  make install; \
+  cd ..; \
+  rm -rf "gperf-${GPERF_VERSION}" gperf.tar.gz
