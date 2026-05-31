@@ -13,13 +13,13 @@ RUN apk add --no-cache --no-scripts \
     wget \
     unzip \
     automake \
-    gperf \
     libtool \
     autoconf \
     openssl-dev \
     zlib-dev \
     zstd-dev \
     rust \
+    gperf \
     cargo \
     bsd-compat-headers \
     linux-headers \
